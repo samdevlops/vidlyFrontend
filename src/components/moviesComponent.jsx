@@ -1,31 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import {getMovies} from '../services/fakeMovieService';
+import React from 'react';
+import { useState } from 'react';
 import Delete from './deleteComponent';
 import Pagination from './pagination';
 import paginate from '../utils/paginate';
 
-function Movies() {
-    const [movies, setMovies] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [pagesize, setPageSize] = useState(4);
-    
-    useEffect(() =>{
-        setMovies(getMovies());
-    }, []);
+function Movies(props) {
 
-    function handleClick(id){
-        const updatedMovies = movies.filter( m => id !== m._id);
-        setMovies(updatedMovies);
-    }
-
-    function handlePageChange(page){
-        setCurrentPage(page);
-    }
-        
+    const { movies, selectedGenre, handleDelete, currentPage, handlePageChange } = props;
+    const [ pageSize, setPageSize] = useState(3);
+     
     if(movies.length === 0) return <p>There are no movies available at the moment!!</p>;
 
-    const moviesCopy = paginate(movies, currentPage, pagesize);
+    let filteredMovies = [];
+    if(selectedGenre.name === "All Genres"){
+        filteredMovies = movies;
+    }
+    else {
+        filteredMovies = movies.filter( movie => movie.genre.name === selectedGenre.name);
+    }
 
+    const moviesCopy = paginate(filteredMovies, currentPage, pageSize);
+ 
     return (
             <>
             <p>Showing {movies.length} movies from the list!!</p>
@@ -46,13 +41,13 @@ function Movies() {
                             <td>{movie.genre.name}</td>
                             <td>{movie.numberInStock}</td>
                             <td>{movie.dailyRentalRate}</td>
-                            <td><Delete id={movie._id} handleClick={handleClick}/></td>
+                            <td><Delete id={movie._id} handleClick={handleDelete}/></td>
                         </tr>
                     })
                 }   
                 </tbody>
             </table>
-            <Pagination movies={movies} currentPage={currentPage} pageSize={pagesize} onPageChange={handlePageChange} />
+            <Pagination moviesCopy={filteredMovies} currentPage={currentPage} pageSize={pageSize} onPageChange={handlePageChange} />
             </>
         );
 }
