@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const FilterComponent = (props) => {
     const {genres, onGenreChange, selectedGenre} = props;
