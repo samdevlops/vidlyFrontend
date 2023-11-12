@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Profile() {
-  const [isSignedIn, setIsSignedIn] = useState(false);
-  const [isUpdating, setIsUpdating] = useState();
+  const [isSignedIn, setIsSignedIn] = useState(true);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   function changeProfilePicture() {
     console.log("Profile picture change requested...");

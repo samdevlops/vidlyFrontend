@@ -9,3 +9,19 @@
 .card{
     text-align: center;
 }
+
+.anchor-color{
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.footer-style{
+    text-align: center !important;
+    background-color: #f8f9fa;
+    padding: 20px;
+    position: fixed;
+    height: 50px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+}

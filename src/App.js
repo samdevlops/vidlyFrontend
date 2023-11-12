@@ -7,6 +7,7 @@ import Contact from "./components/Pages/contact";
 import Info from "./components/Pages/info";
 import Profile from "./components/Pages/profile";
 import { Routes, Route } from "react-router-dom";
+import Footer from "./components/footerComponent";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" Component={MainComponent} />
         </Routes>
       </div>
+      <Footer className="footer-style" />
     </React.Fragment>
   );
 }
